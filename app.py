@@ -377,6 +377,9 @@ if not os.path.exists(EXCEL_FILE):
 #     wb.save(EXCEL_FILE)
 #     return jsonify({"message": "Ticket submitted successfully"})
 
+@app.route('/')
+def home():
+    return '✅ Audit Tracking Tool is Live! Go to /submit-ticket to create a new ticket.'
 
 
 @app.route('/submit_ticket', methods=['POST'])
