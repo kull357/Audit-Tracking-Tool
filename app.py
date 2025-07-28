@@ -185,7 +185,7 @@ def download_report():
 
 @app.route('/')
 def home():
-return '✅ Audit Tracking Tool is Live! Use /submit_ticket or other endpoints.'
+    return '✅ Audit Tracking Tool is Live! Use /submit_ticket or other endpoints.'
 
 
 if __name__ == '__main__':
