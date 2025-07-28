@@ -2,6 +2,8 @@
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from openpyxl import Workbook, load_workbook
+from pytz import timezone
+IST = timezone('Asia/Kolkata')
 from datetime import datetime
 import os
 import re
@@ -48,7 +50,7 @@ def submit_ticket():
     ws = wb.active
 
     ticket_id = data.get("ticket_id")
-    now = datetime.now()
+    now = datetime.now(IST)
     audit_date = now.strftime("%Y-%m-%d")
     audit_time = now.strftime("%H:%M:%S")
 
@@ -167,7 +169,7 @@ def add_audit():
         # row[9].value = data.get("auditor_name")  <-- auditor_name is now handled in ticket form
         row[12].value = data.get("audit_comments")
         row[13].value = data.get("audit_status")
-        now = datetime.now()
+        now = datetime.now(IST)
         row[14].value = now.strftime("%Y-%m-%d")
         row[15].value = now.strftime("%H:%M:%S")
         wb.save(EXCEL_FILE)
