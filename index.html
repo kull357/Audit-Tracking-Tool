@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ticket Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 🔐 Download Report Button -->
+<div style="text-align: right; padding: 20px;">
+  <button id="downloadBtn" onclick="showLoginPopup()">📥 Download Report</button>
+</div>
+
+<!-- 🔐 Login Modal -->
+<div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+     background-color: rgba(0, 0, 0, 0.5); z-index: 999;">
+  <div style="background: white; max-width: 400px; margin: 100px auto; padding: 30px; 
+              border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-align: center;">
+    <h3>🔐 Admin Login</h3>
+    <input type="text" id="username" placeholder="Username" style="width: 80%; padding: 10px; margin: 10px 0;" />
+    <br />
+    <input type="password" id="password" placeholder="Password" style="width: 80%; padding: 10px; margin: 10px 0;" />
+    <br />
+    <button onclick="handleLogin()">Login</button>
+    <button onclick="closeLoginPopup()" style="background-color: #aaa; margin-left: 10px;">Cancel</button>
+    <p id="loginError" style="color: red; margin-top: 10px;"></p>
+  </div>
+</div>
+
+
+
+  <h1>🎫 Ticket Tracker</h1>
+
+  <!-- Ticket Submission Form -->
+  <form id="ticketForm">
+    <div>
+      <label>Ticket ID:</label>
+      <input type="text" name="ticket_id" placeholder="Ticket ID" required />
+    </div>
+    <div>
+      <label>Ticket Name:</label>
+      <input type="text" name="ticket_name" placeholder="Ticket Name" required />
+    </div>
+    <div>
+      <label>BLI:</label>
+      <select name="BLI" required>
+        <option value="" disabled selected>Select BLI</option>
+        <option value="cms">cms</option>
+        <option value="support">support</option>
+        <option value="user-manual">user-manual</option>
+        <option value="sales">sales</option>
+      </select>
+    </div>
+    <div>
+      <label>Request Assigned Date:</label>
+      <input type="date" name="request_assigned_date" required />
+    </div>
+    <div>
+      <label>Request Due Date:</label>
+      <input type="date" name="request_due_date" required />
+    </div>
+    <div>
+      <label>Developer Name:</label>
+      <select name="developer_name" required>
+        <option value="" disabled selected>Select Developer</option>
+        <option value="Komal">Komal</option>
+        <option value="Ajay">Ajay</option>
+        <option value="Sneha">Sneha</option>
+        <option value="Rahul">Rahul</option>
+      </select>
+    </div>
+    <div>
+      <label>URLs (comma-separated):</label>
+      <input type="text" name="urls_list" placeholder="URLs (comma-separated)" required />
+    </div>
+    <div>
+      <label>No. of URLs:</label>
+      <input type="number" name="no_of_urls" placeholder="No. of URLs" required />
+    </div>
+    <div>
+      <label>Audit Type:</label>
+      <select name="audit_type" required>
+        <option value="" disabled selected>Select Audit Type</option>
+        <option value="Prod">Prod</option>
+        <option value="Live">Live</option>
+      </select>
+    </div>
+    <div>
+      <label>Auditor Name:</label>
+      <select name="auditor_name" required>
+        <option value="" disabled selected>Select Auditor</option>
+        <option value="Komal">Komal</option>
+        <option value="Nikita">Nikita</option>
+        <option value="Sameer">Sameer</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit">Submit Ticket</button>
+    </div>
+  </form>
+
+  <hr />
+
+  <!-- Search Section -->
+  <div id="searchSection">
+    <h2>🔍 Search Ticket</h2>
+    <input type="text" id="searchTicketId" placeholder="Search by Ticket ID" />
+    <button onclick="searchByTicketId()">Search</button>
+    <br />
+    <input type="number" id="searchRowNumber" placeholder="Search by Row Number" />
+    <button onclick="searchByRowNumber()">Search</button>
+  </div>
+
+  <div id="resultTable"></div>
+  <p style="text-align: center;">
+  <a href="javascript:void(0);" id="showAllLink" onclick="showAllRowsForTicketId()" 
+     style="display: none; color: #0072ff; font-weight: bold; text-decoration: underline;">
+    Show All Rows
+  </a>
+</p>
+
+
+  <hr />
+
+  <!-- Audit Data Form -->
+  <h2>📝 Add Audit Data (by Row Number)</h2>
+  <form id="auditForm">
+    <div>
+      <label>Row Number:</label>
+      <input type="number" name="row_number" placeholder="Row Number" required />
+    </div>
+    <!-- <div>
+      <label>Auditor Name:</label>
+      <select name="auditor_name" required>
+        <option value="" disabled selected>Select Auditor</option>
+        <option value="Komal">Komal</option>
+        <option value="Nikita">Nikita</option>
+        <option value="Sameer">Sameer</option>
+      </select>
+    </div> -->
+    <div>
+      <label>Audit Comments:</label>
+      <input type="text" name="audit_comments" placeholder="Comments" required />
+    </div>
+    <div>
+      <label>Audit Status:</label>
+      <select name="audit_status" required>
+        <option value="" disabled selected>Select Audit Status</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit">Submit Audit Data</button>
+    </div>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
